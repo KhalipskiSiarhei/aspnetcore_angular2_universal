@@ -1,0 +1,1323 @@
+﻿<!-- BEGIN Chat Script. -->
+<div><a id="liveagent_button_online" routerLink="/calendar" style="display: none;"></a><div id="liveagent_button_offline"></div></div>
+<!-- END Chat Script. -->
+<!--LivePerson: code should be somewhere before chat button-->
+<a class="lebtn">
+  <div id="LP_DIV_1435761484656" style="display:none;"></div>
+</a>
+
+<div></div>
+
+<div id="page-wrapper">
+
+  <!-- ngIf: buttons.showHeader --><header ng-if="buttons.showHeader" class="bar top ng-scope" ng-class="{sub:displayTimer}" style="height: 44px;"><!-- ngIf: displayBanner --><!-- ngInclude: 'template/UI/header/bar.html' --><div ng-include="'template/UI/header/bar.html'" class="ng-scope"><div class="actions-bar ng-scope"><!-- ngIf: buttons.enableBack && !isBetclicPokerFr --><!-- ngInclude: 'template/UI/header/buttons/back.html' --><div ng-if="buttons.enableBack &amp;&amp; !isBetclicPokerFr" class="icons-left ng-scope" ng-include="'template/UI/header/buttons/back.html'"><!-- ngIf: stateName() === 'account' --> <!-- ngIf: stateName() === 'contractTerms' --> <!-- ngIf: stateName() !== 'account' && stateName() !== 'contractTerms' --><button ng-if="stateName() !== 'account' &amp;&amp; stateName() !== 'contractTerms'" class="icon back ng-scope" ng-show="stateHistory.length > 1" ng-click="back()"></button><!-- end ngIf: stateName() !== 'account' && stateName() !== 'contractTerms' --></div><!-- end ngIf: buttons.enableBack && !isBetclicPokerFr --><!-- ngIf: buttons.enableMenu && !isBetclicPokerFr --><!-- ngIf: buttons.enableSearch --><!-- ngInclude: 'template/UI/header/logos/logo.html' --><div class="gb-logo ng-scope" ng-include="'template/UI/header/logos/logo.html'"><a ui-sref="home" ng-hide="isBetclicPokerFr" class="ng-scope" routerLink="/calendar"><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/base/mobile/content/betclic_logo.png" alt="Betclic"></a> <img ng-show="isBetclicPokerFr" src="https://betclick.hs.llnwd.net/e1/page/c16/betclic/mobile/logo_box.png" alt="Betclic" class="ng-scope ng-hide"></div><!-- ngIf: buttons.enableAccount && !context.isAuthenticated && localStorage.lastLogin == undefined && !isBetclicPokerFr && isWebAppBannerHeaderFeatureAvailable === true --><!-- ngIf: buttons.enableAccount && !isBetclicPokerFr --><!-- ngInclude: 'template/UI/header/buttons/account.html' --><div ng-if="buttons.enableAccount &amp;&amp; !isBetclicPokerFr" id="accountBtn" ng-include="'template/UI/header/buttons/account.html'" class="ng-scope"><!-- ngIf: context.isAuthenticated --><span ng-click="account()" ng-if="context.isAuthenticated" gtm-mapping="" gtm-map-id="A2" gtm-map-params="'My account'" class="ng-scope"><!-- ngIf: context.isAuthenticated --><p class="user-balance ng-binding ng-scope" ng-if="context.isAuthenticated">199&nbsp;992,42&nbsp;€</p><!-- end ngIf: context.isAuthenticated --><img class="avatar-account" src="https://betclick.hs.llnwd.net/e1/page/images/global/mobile/icons/avatar-account.png"></span><!-- end ngIf: context.isAuthenticated --> <!-- ngIf: !context.isAuthenticated --></div><!-- end ngIf: buttons.enableAccount && !isBetclicPokerFr --><!-- ngIf: buttons.enableBackToRegister && !isBetclicPokerFr --><!-- ngIf: buttons.enableClose && !isBetclicPokerFr --><!-- ngIf: buttons.isBetclicPokerFrAndShowCloseBtn --><!-- ngIf: buttons.enableContactUs --></div></div><!-- ngIf: displaySubHeader --><div ng-if="displaySubHeader" class="ng-scope"><!-- ngIf: displayTimer --><!-- ngIf: shouldDiplayAgeBanner --></div><!-- end ngIf: displaySubHeader --></header><!-- end ngIf: buttons.showHeader -->
+
+  <div class="page-nav swiper-nav swiper-free-mode headroom headroom--top headroom--pinned" data-ng-show="showNavBar" style="top: 44px;">
+    <div class="swiper-nav-wrapper" style="transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
+      <a class="nav-item swiper-slide swiper-slide-visible swiper-slide-active" ng-class="{'active': isHome}" ui-sref="sport.home" routerLink="/home">
+        <span class="ng-binding">Accueil</span>
+      </a>
+      <!--<a class="nav-item" ng-class="{'active': isEventTemp}" ui-sref="sport.eventWithMatchName({matchName:'psg-om',id:9})">
+          <span>Event 5</span>
+      </a>-->
+
+      <a class="nav-item swiper-slide" ng-class="{'active': isSportList}" ui-sref="sport.sportList" routerLink="/sports">
+        <span class="ng-binding">Sports</span>
+      </a>
+      <!-- ngIf: isAllOfferEnabled --><a class="nav-item swiper-slide ng-scope active" ng-if="isAllOfferEnabled" ng-class="{'active': isAllOffer}" ui-sref="sport.allOffer" routerLink="/calendar">
+        <span class="live-label">All offer<span ng-show="livesCount &amp;&amp; livesCount > 0" class="live-count ng-binding">388</span></span>
+      </a><!-- end ngIf: isAllOfferEnabled -->
+      <!-- ngIf: !isAllOfferEnabled -->
+      <!-- ngIf: isCashoutEnabled --><a data-ng-if="isCashoutEnabled" class="nav-item swiper-slide ng-scope" ng-class="{'active': isCashout}" ui-sref="sport.cashout" routerLink="/cashout">
+        <span class="live-label ng-binding">
+          Cash Out
+          <span ng-show="isAuthenticated &amp;&amp; numberOfBetsEligibleForCashout &amp;&amp; numberOfBetsEligibleForCashout > 0" class="live-count ng-binding">15</span>
+        </span>
+      </a><!-- end ngIf: isCashoutEnabled -->
+      <!-- ngIf: !isAllOfferEnabled -->
+      <!-- ngIf: isColossusAvailable --><a data-ng-if="isColossusAvailable" class="nav-item swiper-slide nav-grids ng-scope" ng-class="{'active': isGrids}" ui-sref="sport.grids" routerLink="/grid">
+        <span class="ng-binding">Grid</span>
+      </a><!-- end ngIf: isColossusAvailable -->
+    </div>
+  </div>
+
+  <!-- uiView:  --><div id="wrapper" class="slide ng-scope" ui-view="" style="padding-top: 88px !important;">
+    <!-- uiView: undefined --><div class="ng-scope">
+      <div showcomponent="calendar" class="ng-scope" id="NG2_UPGRADE_0_3" ng-version="4.2.6">
+        <!---->
+        <!---->
+        <!---->
+        <!----><div>
+          <div id="allOffer">
+            <div>
+              <div class="cal-filter">
+                <div class="cal-filter-sport-controls">
+                  <!----><div class="events-count">247 Matchs</div>
+                  <!---->
+                  <div class="filter-collapse">
+                    <a class="toggle-bt"><span class="sprite-icon"></span></a>
+                    <!----><span>
+                      Filters
+                      <!---->
+                    </span>
+                    <!---->
+                  </div>
+                  <!----><div class="filter-live choice selected">
+                    <span class="sprite-icon"></span>
+                  </div>
+                </div>
+                <div class="cal-filter-sport collapsed">
+                  <div class="cal-filter-sport-part">
+                    <div class="cal-filter-label">Date</div>
+                    <div class="cal-filter-choices">
+                      <a class="choice default selected">
+                        All
+                      </a>
+                      <a class="choice">
+                        Today
+                      </a>
+                      <a class="choice">
+                        Tomorrow
+                      </a>
+                    </div>
+                  </div>
+                  <hr class="cal-filter-sport-separator">
+                  <div class="cal-filter-sport-part">
+                    <div class="cal-filter-label">Options</div>
+                    <div class="cal-filter-choices">
+                      <a class="choice default selected">
+                        All
+                      </a>
+                      <!---->
+                      <!----><a class="choice button">
+                        <span class="logo cashout"></span>
+                      </a>
+                      <!---->
+                    </div>
+                  </div>
+                  <div class="cal-filter-sport-part">
+                    <div class="cal-filter-label">Sports</div>
+                    <div class="cal-filter-choices">
+                      <a class="choice default selected">
+                        All
+                      </a>
+                      <!---->
+                      <a class="choice">
+                        Autres
+                      </a>
+                    </div>
+                  </div>
+                  <hr class="cal-filter-sport-separator">
+                  <div class="cal-filter-sport-part center">
+                    <div class="filter-collapse">
+                      <a class="choice">See 247 events </a>
+                    </div>
+                  </div>
+                  <hr class="cal-filter-sport-separator">
+                </div>
+              </div>
+            </div>
+            <div>
+              <!----><div class="live" enable-back-button="false">
+                <h2 class="section-title">Directs</h2>
+                <div>
+                  <!----><div>
+                    <div class="event-detail">
+                      <span class="match-time">18:00</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Algérie Ligue 1</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">USM Alger - JS Kabyli.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">12:00</span>
+                      <span class="sport-icon-bg sport-icon-bg-27"></span>
+                      <span class="event-name">Open d'Indonésie Doubles F.</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!----><p class="teamSb">A. Kumar - Alistair.</p>
+
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                      </div>
+
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">16:30</span>
+                      <span class="sport-icon-bg sport-icon-bg-13"></span>
+                      <span class="event-name">Russie MHL</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Avto Ekat. - Reaktor N.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">15:45</span>
+                      <span class="sport-icon-bg sport-icon-bg-4"></span>
+                      <span class="event-name">NBA</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Lehigh Mo. - Lettonie.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">08:00</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Corée du Sud Division 2</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Seoul E-L. - Busan I P.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">12:50</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Amicaux clubs</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Zo United - Aizawl</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">12:25</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Amicaux clubs</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Budapest. - Kisvarda</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">18:50</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Amicaux clubs</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Morocco U. - Palestine</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">11:50</span>
+                      <span class="sport-icon-bg sport-icon-bg-20"></span>
+                      <span class="event-name">Major League</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!---->
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line two-odds">
+                                    <!----><div class="match-odd">
+                                      <span class="odd-label">
+
+                                        <!---->
+                                        <!---->
+                                      </span>
+                                      <div class="odd-button">
+                                        1
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div><div class="match-odd">
+                                      <span class="odd-label">
+
+                                        <!---->
+                                        <!---->
+                                      </span>
+                                      <div class="odd-button">
+                                        1.5
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!---->
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">19:00</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Egypte 1er League</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Al-Mokawl. - El-Masry</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">17:35</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Ligue Uruguayenne -19</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Cerro - Juventud</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">22:00</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Egypte 1er League</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Ismaily - Zamalek</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div><div>
+                    <div class="event-detail">
+                      <span class="match-time">03:00</span>
+                      <span class="sport-icon-bg sport-icon-bg-1"></span>
+                      <span class="event-name">Brazil Paulista A1</span>
+                    </div>
+
+                    <!----><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div><div>
+                      <div>
+                        <div class="match-entry">
+                          <a routerLink="/calendar">
+                            <!---->
+                            <div class="match-detail">
+                              <!---->
+                              <div class="match-label">
+                                <!---->
+                                <div>
+                                  <!---->
+                                  <!---->
+                                  <!----><div>
+                                    <div class="liteSb">
+
+                                      <!---->
+                                      <!----><p class="teamSb">Allemagne - Costa Ric.</p>
+                                      <div class="wrapperLive">
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                        <!---->
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!---->
+                                  <!---->
+                                </div>
+                              </div>
+                              <!---->
+                              <!----><div>
+                                <div class="selectionsInLine">
+                                  <div class="odds-line" style="text-align: center">
+                                    <span class="bt-action grey">
+                                      Pariez maintenant
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!---->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div bcsp-request-verification-token="0-9LDE0oX_IO417-StQyFdCXIVWoNRikLzCu5xLvRYoNanYVc-rZLmoD3R7t2ku1D9hUqzxReRv2l93LpmfpNBZ0aXI1:WXzkOfoCS8Wu4Paf7U1zmftmJPV4yNa1KMlx53_xJKZX3x2C7gOjXcEBnMpIEf7CrLyPM7R4rGOGB7xqdK0Hfeq6yHI1">
+    <div data-ng-show="showBettingSlip" class="">
+      <div class="betslip-tap modalDisplay" ng-click="toggleBetSlip();" ng-class="{open : displayBetSlip}">
+        <span class="sprite-icon"></span>
+        <!--ng-show="betsCount > 0"-->
+        <!-- ngIf: bettingSlip.getNumberOfAllSelections()>0 -->
+      </div>
+
+      <!-- ngIf: bettingSlip.isAllResolve() --><div class="betslip-container modalDisplay ng-scope" ng-class="{open : displayBetSlip}" ng-if="bettingSlip.isAllResolve()">
+
+
+        <div class="header-bs">
+          <div class="stakes-number sprite-icon">
+            <p class="ng-binding">0</p>
+          </div>
+        </div>
+
+
+        <div class="scroll-bs">
+
+          <div class="summary-box ng-isolate-scope ng-hide" betting-slip="bettingSlip" togglebs="toggleBetSlip()" is-live="isLive" ng-show="bettingSlip.thereIsARecap() || bettingSlip.thereIsSecondChance()">
+            <h2 class="section-title ng-scope ng-hide" ng-show="bettingSlip.recapStakes.summary.numberOfBets" data-translate="sport.confirmationTitle">Confirmation</h2>
+            <!-- ngRepeat: stake in bettingSlip.recapStakes.details -->
+            <!-- ngIf: bettingSlip.recapStakes.summary.numberOfBets -->
+            <!-- ngIf: bettingSlip.thereIsSecondChance() -->
+            <!-- ngIf: !bettingSlip.thereIsSecondChance() --><div ng-if="!bettingSlip.thereIsSecondChance()" class="ng-scope">
+              <a class="bt-action retain-button ng-scope" ng-click="betAgain()" ng-show="!isLive" data-translate="sport.btnBetAgain">Garder mes sélections</a>
+              <a class="bt-action ng-scope" ng-click="recapOkClick()" data-translate="sport.btnOk">OK</a>
+            </div><!-- end ngIf: !bettingSlip.thereIsSecondChance() -->
+            <!-- ngIf: bettingSlip.thereIsSecondChance() && !bettingSlip.bettingInProgress -->
+            <div class="betting-progress ng-hide" ng-show="bettingSlip.bettingInProgress"><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/small-loader.gif"><p></p></div>
+          </div>
+
+          <div ng-show="!bettingSlip.thereIsARecap() &amp;&amp; !bettingSlip.thereIsSecondChance()">
+            <div class="menu-bs clearfix ng-isolate-scope" betting-slip="bettingSlip" delete-mode="deleteMode" is-live="isLive" slider-selected="sliderSelected">
+              <div class="left-zone">
+                <a ng-class="{selected : !isLive}" ng-click="showPrelive()" class="selected">
+                  <span class="label-bt ng-scope" data-translate="sport.bsUpcoming">A venir</span><!-- ngIf: isLive && bettingSlip.numberOfPreliveSelections() > 0 -->
+                </a>
+                <a class="live-bt" ng-class="{selected : isLive}" ng-click="showLive()">
+                  <span class="label-bt ng-scope" data-translate="sport.bsLive">Directs</span><!-- ngIf: !isLive && bettingSlip.numberOfliveSelections() > 0 -->
+                </a>
+              </div>
+              <div class="right-zone">
+                <!-- ngIf: sliderIsAvailable() -->
+                <!-- ngIf: deleteAllIsAvailable() --><a class="delete-bt ng-scope" ng-if="deleteAllIsAvailable()"><span class="sprite-icon" ng-click="deleteModeClick()"></span></a><!-- end ngIf: deleteAllIsAvailable() -->
+              </div>
+            </div>
+
+            <div ng-show="!bettingSlip.isEmpty(isLive)" class="ng-hide">
+
+              <!-- ngIf: bettingSlip.ThereIsAnError(isLive,sliderSelected) -->
+
+              <div class="bets-container ng-isolate-scope" betting-slip="bettingSlip" delete-mode="deleteMode" is-live="isLive" slider-selected="sliderSelected">
+
+                <!-- ngIf: deleteMode -->
+                <!-- ngRepeat: selection in bettingSlip.getSelections(isLive) -->
+
+                <div class="delete-confirm ng-hide" ng-show="deleteMode">
+                  <a class="bt-action cancel ng-scope" ng-click="cancelDeleteSelections()" data-translate="sport.cancel">Annulez</a>
+                  <a class="bt-action ng-scope" ng-click="deleteSelections()" data-translate="sport.delete">Supprimez</a>
+                </div>
+
+              </div>
+
+
+              <div class="wrap-bottom-zone">
+
+                <!-- ngInclude: 'bsInputs.html' --><div ng-include="'bsInputs.html'" class="ng-scope">
+                  <!-- ngInclude: 'bsMultipleSystemSlider.html' --><div ng-include="'bsMultipleSystemSlider.html'" class="ng-scope">
+                    <div ng-show="multipleIsAvailable() &amp;&amp; !sliderSelected" class="multiple stakes-fieldset ng-isolate-scope collapse ng-hide" ng-class="{collapse : !isMultiCollapsed(), 'overlayed': !bettingSlip.checkIfbettingAllowed()}" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" is-multi-collapsed="isMultiCollapsed()" set-multi-collapsed="setMultiCollapsed(isCollapse)" is-system-collapsed="isSystemCollapsed()" set-system-collapsed="setSystemCollapsed(isCollapse)">
+                      <p class="stakes-fieldset-title" ng-click="clickCollapse()"><span data-translate="sport.multiple" class="ng-scope">Combiné</span><span ng-show="bettingSlip.isCashOutApplicable(isLive)" class="bs-multiple-bet-availible-for-cashout"></span></p>
+                      <div ng-show="!isMultiCollapsed()">
+                        <!-- ngIf: bettingSlip.multipleStakeTooLow[isLive] -->
+                        <!-- ngIf: bettingSlip.multipleStakeTooHigh[isLive] -->
+
+                        <div class="bs-odd"> <span data-translate="sport.oddsWithSemicolon" class="ng-scope">Cote :</span> <strong class="ng-binding">---</strong></div>
+                        <div class="bet-control-fieldset">
+                          <span class="change-value disabled" ng-click="!bettingSlip.MultipleIsAllowed(isLive) || lessMultipleBetValue()" ng-class="{disabled : !bettingSlip.MultipleIsAllowed(isLive)}" ng-show="bettingSlip.checkIfbettingAllowed()">-</span>
+                          <input bcsp-input-stake="" type="number" class="betslip-betvalue ng-isolate-scope" amount="multipleStake" ng-disabled="!bettingSlip.MultipleIsAllowed(isLive) || !bettingSlip.checkIfbettingAllowed()" disabled="disabled">
+                          <span class="change-value disabled" ng-click="!bettingSlip.MultipleIsAllowed(isLive) || moreMultipleBetValue()" ng-class="{disabled : !bettingSlip.MultipleIsAllowed(isLive)}" ng-show="bettingSlip.checkIfbettingAllowed()">+</span>
+                        </div>
+                        <p class="potential-fieldset"><span data-translate="sport.potentialWinnings" class="ng-scope">Gain potentiel</span> : <strong class="ng-binding">0,00&nbsp;€</strong></p>
+                      </div>
+                    </div>
+
+                    <div ng-show="systemIsAvailable() &amp;&amp; !sliderSelected &amp;&amp; systems.length > 0" class="multiple stakes-fieldset ng-isolate-scope ng-hide" ng-class="{collapse : !isSystemCollapsed()}" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" is-multi-collapsed="isMultiCollapsed()" set-multi-collapsed="setMultiCollapsed(isCollapse)" is-system-collapsed="isSystemCollapsed()" set-system-collapsed="setSystemCollapsed(isCollapse)">
+
+                      <p class="stakes-fieldset-title ng-scope" ng-click="clickCollapse()" data-translate="sport.systemStake">Système</p>
+
+                      <div ng-show="!isSystemCollapsed()" class="ng-hide">
+                        <div ng-show="systemNotAvailableTooMuchSelection()" data-translate="sport.bettingSlipMaxSelection" class="ng-scope ng-hide">Il n'y a pas de pari système disponible si vous avez 9 sélections ou plus.</div>
+                        <div ng-show="!systemNotAvailableTooMuchSelection()">
+                          <!-- ngIf: bettingSlip.systemStakeTooLow[isLive] -->
+                          <!-- ngIf: bettingSlip.systemStakeTooHigh[isLive] -->
+                          <div class="bet-control-fieldset">
+                            <span class="change-value disabled" ng-click="lessSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">-</span>
+                            <input bcsp-input-stake="" type="number" class="betslip-betvalue ng-isolate-scope" amount="systemStake" ng-disabled="bettingSlip.ThereIsAnMultipleError(isLive)" disabled="disabled">
+                            <span class="change-value disabled" ng-click="moreSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">+</span>
+                          </div>
+
+                          <select ng-model="currentSystem" ng-options="system.name for system in systems" class="ng-pristine ng-untouched ng-valid"><option value="?" selected="selected" label=""></option></select>
+                          <p class="potential-fieldset"><span data-translate="sport.potentialWinnings" class="ng-scope">Gain potentiel</span> : <strong class="ng-binding">0,00&nbsp;€</strong></p>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                    <div ng-show="sliderIsAvailable() &amp;&amp; sliderSelected" class="slider-wrap stakes-fieldset ng-isolate-scope ng-hide" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected">
+
+                      <div class="stakes-fieldset-slider" ng-show="!systemNotAvailableTooMuchSelection()">
+                        <div class="input-wrap">
+                          <span class="change-value disabled" ng-click="lessSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">-</span>
+                          <input bcsp-input-stake="" type="number" class="betslip-betvalue ng-isolate-scope" amount="sliderStake" ng-disabled="bettingSlip.ThereIsAnMultipleError(isLive)" disabled="disabled">
+                          <span class="change-value disabled" ng-click="moreSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">+</span>
+                        </div>
+                        <span data-translate="sport.stakePerBet" class="ng-scope">Mise par pari :</span>
+                      </div>
+
+                      <div>
+                        <div ng-show="systemNotAvailableTooMuchSelection()" data-translate="sport.bettingSlipMaxSelection" class="ng-scope ng-hide">Il n'y a pas de pari système disponible si vous avez 9 sélections ou plus.</div>
+                        <div ng-show="!systemNotAvailableTooMuchSelection()">
+                          <!-- ngIf: bettingSlip.sliderStakeTooLow[isLive] -->
+                          <!-- ngIf: bettingSlip.sliderStakeTooHigh[isLive] -->
+
+                          <div class="zone-slider nbCol-0" ng-class="'nbCol-'+sliderSystems.length">
+                            <div class="wrap-curve">
+                              <div class="curve-infos">
+                                <!-- ngRepeat: system in sliderSystems -->
+                              </div>
+                              <img class="mask" src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/mask-system.png">
+                              <div class="curve-gain">
+                                <!-- ngRepeat: system in sliderSystems -->
+                              </div>
+                            </div>
+                            <div id="wrap-range-slider">
+                              <div class="angular-custom-range-slider ng-isolate-scope" min="sliderMin" max="sliderMax" handle-values="sliderValue" value-update="sliderValue[0].value"><div class="angular-custom-range-slider-range"><span class="range-bar range-bar-0"></span><div class="angular-custom-range-slider-handle angular-custom-range-slider-handle-0"></div></div><div class="angular-custom-range-slider-values"><!-- ngRepeat: handleValue in handleValues --><!-- ngIf: showValues --><!-- end ngRepeat: handleValue in handleValues --></div></div>
+                            </div>
+                            <div class="recap-slider">
+                              <p class="system-name ng-binding ng-hide" ng-show="currentSiderSystem.namesToTranslate"></p>
+                              <p class="system-name ng-binding" ng-show="!currentSiderSystem.namesToTranslate"></p>
+                              <p class="system-description ng-binding"></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="betslip-recap ng-isolate-scope" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected">
+
+                  <div class="betting-progress ng-hide" ng-show="bettingSlip.bettingInProgress"><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/small-loader.gif"><p></p></div>
+                  <div>
+                    <p class="stakes-total"><span data-translate="sport.numberBets" class="ng-scope">Nombre de paris</span> : <strong class="ng-binding">0</strong></p>
+                    <p class="stakes-recap"><span data-translate="sport.totalStake" class="ng-scope">Mise totale</span> : <strong class="ng-binding">0,00&nbsp;€</strong></p>
+                    <p class="stakes-potential">
+                      <span data-translate="sport.potentialWinnings" class="ng-scope">Gain potentiel</span> : <strong class="ng-binding">
+                        0,00&nbsp;€
+                        <!-- ngIf: bettingSlip.taxContext.isActive -->
+                      </strong>
+                    </p>
+                    <div ng-show="bettingSlip.MultipleIsAllowed(isLive) || bettingSlip.numberOfSelections(isLive) === 1" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" class="ng-isolate-scope ng-hide"><!-- ngIf: resultingBonus = getCurrentBonus(); resultingBonus.boostExists && bettingSlip.shouldShowBoostHint(isLive) --></div>
+                    <div betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" class="ng-isolate-scope">
+                      <!-- ngIf: bettingSlip.taxContext.isActive -->
+
+                    </div>
+                  </div>
+                  <div class="bt-center">
+                    <button class="bt-action ng-scope" type="button" data-translate="sport.betNow" ng-click="bet()" ng-disabled="!bettingSlip.isOkToBet(isLive,sliderSelected)" ng-show="!bettingSlip.bettingInProgress" disabled="disabled">Pariez maintenant</button>
+                    <div betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" class="ng-isolate-scope">
+                      <!-- ngIf: bettingSlip.taxContext.isActive && bettingSlip.taxContext.displayTooltip -->
+
+                    </div>
+                  </div>
+                  <!--<input type="button" value="FakeRecap" ng-click="fakeRecap()" ng-disabled="bettingSlip.bettingInProgress" />-->
+                </div>
+
+
+              </div>
+            </div>
+            <div ng-show="bettingSlip.isEmpty(isLive)">
+              <div class="error-bs"><span data-translate="sport.emptyCart" class="ng-scope">Votre panier ne contient aucune sélection valide</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end ngIf: bettingSlip.isAllResolve() -->
+
+      <div class="bs-overlay" ng-class="{active : displayBetSlip}" ng-click="toggleBetSlip();">
+        <div class="wrap-close">
+          <div class="close-bs sprite-icon"></div>
+        </div>
+      </div>
+    </div>
+    <div class="forbidden-sticker ng-hide" data-ng-show="!displayBetSlip &amp;&amp; bettingSlip.shouldForbiddanceStickedMessageBeShown()">
+      <a class="close-btn" ng-click="closeSticker()">
+        <span class="close-icon"></span>
+      </a>
+      <p class="ng-binding"></p>
+    </div>
+  </div>
+</div>
+
+<div class="ng-scope"></div>
