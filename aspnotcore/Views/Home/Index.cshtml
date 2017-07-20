@@ -2,5 +2,9 @@
 
 @section scripts {
     <!-- Our webpack bundle -->
-    <script src="~/dist/main-browser.js" asp-append-version="true"></script>
+    @*<script src="~/dist/main-browser.js" asp-append-version="true"></script>*@
+    <script type="text/javascript" src="~/dist/inline.bundle.js"></script>
+    <script type="text/javascript" src="~/dist/polyfills.bundle.js"></script>
+    <script type="text/javascript" src="~/dist/vendor.bundle.js"></script>
+    <script type="text/javascript" src="~/dist/main.bundle.js"></script>
 }
