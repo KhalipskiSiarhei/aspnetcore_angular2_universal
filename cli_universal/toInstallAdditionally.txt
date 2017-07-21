@@ -1,0 +1,2 @@
+@angular/platform-server
+aspnet-prerendering
