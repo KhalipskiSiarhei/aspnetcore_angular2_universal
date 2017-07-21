@@ -124,7 +124,7 @@ namespace AspCoreServer.Controllers
       var prerenderResult = await Prerenderer.RenderToString(
       "/",
       nodeServices,
-      new JavaScriptModuleExport(applicationBasePath + "/Client/dist/main-server"),
+      new JavaScriptModuleExport(applicationBasePath + "/wwwroot/dist/server/main-server"),
       unencodedAbsoluteUrl,
       unencodedPathAndQuery,
       transferData, // Our simplified Request object & any other CustommData you want to send!

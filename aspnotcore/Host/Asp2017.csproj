@@ -17,40 +17,11 @@
   <ItemGroup>
     <!-- Files not to show in IDE -->
     <None Remove="yarn.lock" />
-	<Content Remove="wwwroot\dist\**" />
-	<None Remove="Client\dist\**" />
-    <Content Remove="coverage\**" />
-
+    <Content Remove="wwwroot\dist\**" />
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="Client\**" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Client\tsconfig.browser.json" />
-    <Content Include="Client\tsconfig.server.aot.json" />
-    <Content Include="Client\tsconfig.server.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Client\app\features\cashout\" />
   </ItemGroup>
-  <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
-    <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <Exec Command="npm install" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --env.aot --env.client" />
-    <Exec Command="node node_modules/webpack/bin/webpack.js --env.aot --env.server" />
-    <!-- Include the newly-built files in the publish output -->
-    <ItemGroup>
-      <DistFiles Include="wwwroot\dist\**; Client\dist\**" />
-      <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
-        <RelativePath>%(DistFiles.Identity)</RelativePath>
-        <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      </ResolvedFileToPublish>
-    </ItemGroup>
-  </Target>
-  <Target Name="CleanDist" AfterTargets="Clean">
-    <ItemGroup>
-      <FilesToDelete Include="Client\dist\**; wwwroot\dist\**" />
-    </ItemGroup>
-    <Delete Files="@(FilesToDelete)" />
-    <RemoveDir Directories="Client\dist; wwwroot\dist" />
-  </Target>
 </Project>
