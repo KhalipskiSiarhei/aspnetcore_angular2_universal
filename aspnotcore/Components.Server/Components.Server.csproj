@@ -2,15 +2,33 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <PreBuildEvent></PreBuildEvent>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Client\app\**" />
     <Compile Remove="Client\dist\**" />
+    <Compile Remove="Client\polyfills\**" />
+    <EmbeddedResource Remove="Client\app\**" />
     <EmbeddedResource Remove="Client\dist\**" />
+    <EmbeddedResource Remove="Client\polyfills\**" />
+    <None Remove="Client\app\**" />
     <None Remove="Client\dist\**" />
+    <None Remove="Client\polyfills\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Client\main.browser.ts" />
+    <None Remove="Client\main.server.aot.ts" />
+    <None Remove="Client\main.server.ts" />
+    <None Remove="Client\tsconfig.browser.json" />
+    <None Remove="Client\tsconfig.server.aot.json" />
+    <None Remove="Client\tsconfig.server.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Client\" />
+    <Folder Include="Client\" />
     <Folder Include="Client\" />
   </ItemGroup>
 
