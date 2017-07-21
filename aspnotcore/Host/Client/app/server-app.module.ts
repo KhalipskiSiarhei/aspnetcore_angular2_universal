@@ -5,8 +5,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { ServerTransferStateModule } from '../modules/transfer-state/server-transfer-state.module';
-import { TransferState } from '../modules/transfer-state/transfer-state';
+import { ServerTransferStateModule } from './modules/transfer-state/server-transfer-state.module';
+import { TransferState } from './modules/transfer-state/transfer-state';
 
 @NgModule({
     bootstrap: [AppComponent],

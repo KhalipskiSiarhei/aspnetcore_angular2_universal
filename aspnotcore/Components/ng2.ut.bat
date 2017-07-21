@@ -1,0 +1,2 @@
+call ng test
+pause
