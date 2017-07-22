@@ -1,0 +1,2 @@
+call ng lint
+pause
