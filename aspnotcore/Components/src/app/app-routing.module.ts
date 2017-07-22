@@ -16,7 +16,7 @@ const appRoutes: Routes = [
             appRoutes,
             {
                 // <-- debugging purposes only
-                enableTracing: true,
+                enableTracing: false,
                 preloadingStrategy: PreloadAllModules,
                 initialNavigation: 'enabled'
             }

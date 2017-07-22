@@ -9,6 +9,7 @@ import { HomeModule } from './features/home/home.module';
 import { AppComponent } from './app.component';
 import { TransferHttpModule } from './modules/transfer-http/transfer-http.module';
 import { LinkService } from './shared/link.service';
+import { DataService } from './shared/data.service';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ORIGIN_URL } from './shared/constants/baseurl.constants';
         AppComponent
     ],
     providers: [
-        LinkService
+        LinkService,
+        DataService
     ],
     bootstrap: [AppComponent]
 })
