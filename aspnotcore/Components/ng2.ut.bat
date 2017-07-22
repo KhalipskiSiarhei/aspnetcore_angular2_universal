@@ -1,2 +1,2 @@
-call ng test
+call ng test --code-coverage=true
 pause
