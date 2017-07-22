@@ -9,14 +9,14 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    public transferedData: string;
+    public livesCount: string;
 
     constructor(private dataService: DataService) {
     }
 
     ngOnInit() {
-        this.dataService.getTransferData().subscribe(result => {
-            this.transferedData = JSON.stringify(result);
+        this.dataService.getLivesCount().subscribe(result => {
+            this.livesCount = result;
         });
     }
 }

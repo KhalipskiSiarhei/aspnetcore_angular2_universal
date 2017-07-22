@@ -11,8 +11,8 @@ export class DataService {
     constructor(public transferHttp: TransferHttp, public http: Http) {
     }
 
-    public getTransferData(): Observable<string> {
-        return this.transferHttp.get('http://services.groupkt.com/country/get/iso3code/IND').map((response) => {
+    public getLivesCount(): Observable<string> {
+        return this.transferHttp.get('/lives/count').map((response) => {
             let result = JSON.stringify(response);
             return result;
         });

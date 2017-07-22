@@ -104,7 +104,6 @@
           <div class="inner-inner-content-wrapper" ng-class="{'has-header':showHeader}" ng-transclude="">
 
             <div ng-transclude="" class="ng-scope">
-
               <!-- ngRepeat: sportCompetitions in sportList | orderBy: 'position' --><div class="category ng-scope" data-ng-repeat="sportCompetitions in sportList | orderBy: 'position'">
                 <div class="sport-cat" ng-click="toggleGroup(sportCompetitions.id)" ng-class="{'active': isGroupShown(sportCompetitions.id)}">
                   <span class="sport-icon-bg sport-icon-bg-1"></span><span class="ng-binding">Football</span>

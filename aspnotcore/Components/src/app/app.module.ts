@@ -8,9 +8,19 @@ import { HomeModule } from './features/home/home.module';
 
 import { AppComponent } from './app.component';
 import { TransferHttpModule } from './modules/transfer-http/transfer-http.module';
+import { TransferHttp } from './modules/transfer-http/transfer-http';
 import { LinkService } from './shared/link.service';
 import { DataService } from './shared/data.service';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
+
+// i18n support
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { CustomTranslateHttpLoader } from './modules/custom-translate-http-loader';
+
+export function createTranslateLoader(http: TransferHttp) {
+    // i18n files are in `wwwroot/assets/`
+    return new CustomTranslateHttpLoader(http, '/translations/', '');
+}
 
 @NgModule({
     imports: [
@@ -19,6 +29,14 @@ import { ORIGIN_URL } from './shared/constants/baseurl.constants';
         FormsModule,
         TransferHttpModule, // Our Http TransferData method
         HomeModule,
+        // i18n support
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: (createTranslateLoader),
+                deps: [TransferHttp]
+            }
+        }),
         AppRoutingModule
     ],
     declarations: [
@@ -26,7 +44,8 @@ import { ORIGIN_URL } from './shared/constants/baseurl.constants';
     ],
     providers: [
         LinkService,
-        DataService
+        DataService,
+        TranslateModule
     ],
     bootstrap: [AppComponent]
 })

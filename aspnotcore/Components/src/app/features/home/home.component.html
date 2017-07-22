@@ -159,7 +159,7 @@
         <span class="ng-binding">Sports</span>
       </a>
       <!-- ngIf: isAllOfferEnabled --><a class="nav-item swiper-slide ng-scope" ng-if="isAllOfferEnabled" ng-class="{'active': isAllOffer}" ui-sref="sport.allOffer" routerLink="/calendar">
-        <span class="live-label">All offer<span ng-show="livesCount &amp;&amp; livesCount > 0" class="live-count ng-binding">89</span></span>
+        <span class="live-label">All offer<span ng-show="livesCount &amp;&amp; livesCount > 0" class="live-count ng-binding">{{livesCount}}</span></span>
       </a><!-- end ngIf: isAllOfferEnabled -->
       <!-- ngIf: !isAllOfferEnabled -->
       <!-- ngIf: isCashoutEnabled --><a data-ng-if="isCashoutEnabled" class="nav-item swiper-slide ng-scope" ng-class="{'active': isCashout}" ui-sref="sport.cashout" routerLink="/cashout">
@@ -204,8 +204,8 @@
                       <div ng-show="!noLiveContent" data-live-resumes="currentLiveResumes" data-boxtitle="liveBetsTitle" data-more-bets="hasMoreLiveBets" class="bet-box live ng-isolate-scope" id="liveBets">
                         <!-- ngRepeat: liveResumeGp in liveResumesGroupByHourMinAndCompetition --><div data-ng-repeat="liveResumeGp in liveResumesGroupByHourMinAndCompetition" class="ng-scope">
                           <!-- ngIf: $first --><div ng-if="$first" class="live ng-scope">
-                            <h2 class="section-title ng-binding">Directs</h2>
-                            <h2 class="section-title ng-binding">Transfered Data - {{transferedData}}</h2>
+                            <h2 class="section-title ng-binding">{{ 'live' | translate}}</h2>
+                            
                           </div><!-- end ngIf: $first -->
 
                           <div class="eventLive">
@@ -242,7 +242,7 @@
                                     <!-- ngIf: !hasMarket(liveResume.market) --><div ng-if="!hasMarket(liveResume.market)" class="ng-scope">
                                       <div class="odds-line" style="text-align: center">
                                         <span class="bt-action grey">
-                                          <span data-translate="sport.betNow" class="ng-scope">Pariez maintenant</span>
+                                          <span data-translate="sport.betNow" class="ng-scope">{{ 'betNow' | translate  }}</span>
                                         </span>
                                       </div>
                                     </div><!-- end ngIf: !hasMarket(liveResume.market) -->
@@ -285,7 +285,7 @@
                                     <!-- ngIf: !hasMarket(liveResume.market) --><div ng-if="!hasMarket(liveResume.market)" class="ng-scope">
                                       <div class="odds-line" style="text-align: center">
                                         <span class="bt-action grey">
-                                          <span data-translate="sport.betNow" class="ng-scope">Pariez maintenant</span>
+                                          <span data-translate="sport.betNow" class="ng-scope">{{ 'betNow' | translate  }}</span>
                                         </span>
                                       </div>
                                     </div><!-- end ngIf: !hasMarket(liveResume.market) -->
@@ -397,7 +397,7 @@
                                     <!-- ngIf: !hasMarket(liveResume.market) --><div ng-if="!hasMarket(liveResume.market)" class="ng-scope">
                                       <div class="odds-line" style="text-align: center">
                                         <span class="bt-action grey">
-                                          <span data-translate="sport.betNow" class="ng-scope">Pariez maintenant</span>
+                                          <span data-translate="sport.betNow" class="ng-scope">{{ 'betNow' | translate  }}</span>
                                         </span>
                                       </div>
                                     </div><!-- end ngIf: !hasMarket(liveResume.market) -->
@@ -440,7 +440,7 @@
                                     <!-- ngIf: !hasMarket(liveResume.market) --><div ng-if="!hasMarket(liveResume.market)" class="ng-scope">
                                       <div class="odds-line" style="text-align: center">
                                         <span class="bt-action grey">
-                                          <span data-translate="sport.betNow" class="ng-scope">Pariez maintenant</span>
+                                          <span data-translate="sport.betNow" class="ng-scope">{{ 'betNow' | translate  }}</span>
                                         </span>
                                       </div>
                                     </div><!-- end ngIf: !hasMarket(liveResume.market) -->
@@ -457,7 +457,7 @@
                       <div load-if-display-in-browser="" load-that="loadHomeBoxesMarkets()" load-done="homeBoxesMarketsLoaded" class="ng-isolate-scope">
 
                         <div data-bets="popularBets" data-no-content="noPopularContent" data-boxtitle="popularBetsTitle" class="bet-box ng-isolate-scope" id="popularBets">
-                          <h2 class="section-title ng-binding">Le TOP des paris</h2>
+                          <h2 class="section-title ng-binding">{{ 'popularBets' | translate}}</h2>
                           <div data-ng-show="noContent" data-translate="sport.noContent" class="ng-scope">Pas de contenu pour le moment</div>
                           <ul>
                             <!-- bet : EventMonoMarketVm -->
@@ -468,7 +468,7 @@
                         </div>
 
                         <div data-bets="lastMinutesBets" data-no-content="noLastMinutesContent" data-boxtitle="lastMinutesBetsTitle" data-more-bets="hasMoreLastMinutesBets" class="bet-box ng-isolate-scope" id="lastMinutesBets">
-                          <h2 class="section-title ng-binding">Dernière minute</h2>
+                          <h2 class="section-title ng-binding">{{ 'lastMinuteListTitle' | translate}}</h2>
                           <div data-ng-show="noContent" data-translate="sport.noContent" class="ng-scope ng-hide">Pas de contenu pour le moment</div>
                           <ul>
                             <!-- bet : EventMonoMarketVm -->
@@ -588,7 +588,7 @@
                         </div>
 
                         <div ng-show="isAuthenticated" data-no-content="noFavoriteContent" data-bets="userFavoriteBets" data-boxtitle="userFavoriteBetsTitle" class="bet-box ng-isolate-scope" id="userFavoriteBets">
-                          <h2 class="section-title ng-binding">Favoris</h2>
+                          <h2 class="section-title ng-binding">{{ 'menuFavorites' | translate}}</h2>
                           <div data-ng-show="noContent" data-translate="sport.noContent" class="ng-scope">Pas de contenu pour le moment</div>
                           <ul>
                             <!-- bet : EventMonoMarketVm -->
@@ -825,7 +825,7 @@
                     </div>
                   </div>
                   <div class="bt-center">
-                    <button class="bt-action ng-scope" type="button" data-translate="sport.betNow" ng-click="bet()" ng-disabled="!bettingSlip.isOkToBet(isLive,sliderSelected)" ng-show="!bettingSlip.bettingInProgress" disabled="disabled">Pariez maintenant</button>
+                    <button class="bt-action ng-scope" type="button" data-translate="sport.betNow" ng-click="bet()" ng-disabled="!bettingSlip.isOkToBet(isLive,sliderSelected)" ng-show="!bettingSlip.bettingInProgress" disabled="disabled">{{ 'betNow' | translate  }}</button>
                     <div betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" class="ng-isolate-scope">
                       <!-- ngIf: bettingSlip.taxContext.isActive && bettingSlip.taxContext.displayTooltip -->
 
