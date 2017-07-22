@@ -3,3 +3,5 @@
 ################################################################################
 
 /aspnotcore/Components.Server/Client
+/aspnotcore/Components/obj
+/aspnotcore/Components.Server/obj
