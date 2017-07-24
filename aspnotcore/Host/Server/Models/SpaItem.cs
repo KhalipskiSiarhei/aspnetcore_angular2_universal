@@ -14,5 +14,6 @@ namespace Asp2017.Server.Models
       public JToken Meta;
       public JToken Links;
       public JToken TransferData;
+      public JToken Scripts;
   }
 }

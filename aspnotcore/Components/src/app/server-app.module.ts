@@ -7,6 +7,7 @@ import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
 import { ServerTransferStateModule } from './modules/transfer-state/server-transfer-state.module';
 import { TransferState } from './modules/transfer-state/transfer-state';
+import { ServerPrebootModule } from 'preboot/server';
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -20,7 +21,8 @@ import { TransferState } from './modules/transfer-state/transfer-state';
         ServerTransferStateModule,
 
         // Our Common AppModule
-        AppModule
+        AppModule,
+        ServerPrebootModule.recordEvents({ appRoot: 'app' })
     ]
 })
 export class ServerAppModule {

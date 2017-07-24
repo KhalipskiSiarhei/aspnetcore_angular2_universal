@@ -55,6 +55,7 @@ namespace AspCoreServer.Controllers
       ViewData["Meta"] = spaItemToUse.Meta; // set our <meta> SEO tags
       ViewData["Links"] = spaItemToUse.Links; // set our <link rel="canonical"> etc SEO tags
       ViewData["TransferData"] = spaItemToUse.TransferData; // our transfer data set to window.TRANSFER_CACHE = {};
+      ViewData["Scripts"] = spaItemToUse.Scripts;
 
       return View();
     }
@@ -97,7 +98,8 @@ namespace AspCoreServer.Controllers
 
     private bool IsReRenderedSSR(string path)
     {
-      return path.Contains("calendar");
+      //return path.Contains("calendar");
+      return true;
     }
 
     private bool IsCSR(string path)
@@ -138,6 +140,7 @@ namespace AspCoreServer.Controllers
       renderedSpaItem.Meta = prerenderResult.Globals["meta"]; // set our <meta> SEO tags
       renderedSpaItem.Links = prerenderResult.Globals["links"]; // set our <link rel="canonical"> etc SEO tags
       renderedSpaItem.TransferData = prerenderResult.Globals["transferData"]; // our transfer data set to window.TRANSFER_CACHE = {};
+      renderedSpaItem.Scripts = prerenderResult.Globals["scripts"]; // Scripts
       return renderedSpaItem;
     }
   }

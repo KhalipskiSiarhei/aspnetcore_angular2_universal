@@ -19,4 +19,8 @@ export class HomeComponent implements OnInit {
             this.livesCount = result;
         });
     }
+
+    public onLiveClicked() {
+        console.log('Click by live event');
+    }
 }

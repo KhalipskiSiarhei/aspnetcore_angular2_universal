@@ -120,6 +120,11 @@ export function ngAspnetCoreEngine(
                   htmlDoc.indexOf('</body>')
                 );
 
+                const SCRIPTS = htmlDoc.substring(
+                    htmlDoc.indexOf('<script>'),
+                    htmlDoc.indexOf('</script>') + 8
+                );
+
                 // Strip out Styles / Meta-tags / Title
                 const STYLES = [];
                 const META = [];
@@ -189,7 +194,8 @@ export function ngAspnetCoreEngine(
                     styles: STYLES_STRING,
                     title: TITLE,
                     meta: META.join(' '),
-                    links: LINKS.join(' ')
+                    links: LINKS.join(' '),
+                    scripts: SCRIPTS
                   }
                 });
 

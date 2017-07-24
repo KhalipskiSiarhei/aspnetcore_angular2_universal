@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { REQUEST } from './shared/constants/request';
 import { ORIGIN_URL } from './shared/constants/baseurl.constants';
 import { BrowserTransferStateModule } from './modules/transfer-state/browser-transfer-state.module';
+import { BrowserPrebootModule } from 'preboot/browser';
 
 export function getOriginUrl() {
   return window.location.origin;
@@ -28,7 +29,8 @@ export function getRequest() {
         BrowserTransferStateModule,
 
         // Our Common AppModule
-        AppModule
+        AppModule,
+        BrowserPrebootModule.replayEvents()
     ],
     providers: [
         {

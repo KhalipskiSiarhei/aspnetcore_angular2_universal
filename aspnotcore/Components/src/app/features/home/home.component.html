@@ -204,14 +204,14 @@
                       <div ng-show="!noLiveContent" data-live-resumes="currentLiveResumes" data-boxtitle="liveBetsTitle" data-more-bets="hasMoreLiveBets" class="bet-box live ng-isolate-scope" id="liveBets">
                         <!-- ngRepeat: liveResumeGp in liveResumesGroupByHourMinAndCompetition --><div data-ng-repeat="liveResumeGp in liveResumesGroupByHourMinAndCompetition" class="ng-scope">
                           <!-- ngIf: $first --><div ng-if="$first" class="live ng-scope">
+                            <button id="testButton" (click)="onLiveClicked()">Test button</button>
                             <h2 class="section-title ng-binding">{{ 'live' | translate}}</h2>
-                            
-                          </div><!-- end ngIf: $first -->
+                                                      </div><!-- end ngIf: $first -->
 
                           <div class="eventLive">
                             <div>
                               <!-- ngRepeat: liveResume in liveResumeGp --><div data-ng-repeat="liveResume in liveResumeGp" class="match-entry ng-scope">
-                                <a ng-href="live/176424" href="">
+                                <a ng-href="live/176424" (click)="onLiveClicked()">
                                   <!-- ngIf: isNotDefinedOrTrue(liveResume.isFirst) --><div ng-if="isNotDefinedOrTrue(liveResume.isFirst)" class="event-detail ng-scope">
                                     <span class="match-time ng-binding">12:00</span>
                                     <span class="sport-icon-bg sport-icon-bg-27"></span>
@@ -258,7 +258,7 @@
                           <div class="eventLive">
                             <div>
                               <!-- ngRepeat: liveResume in liveResumeGp --><div data-ng-repeat="liveResume in liveResumeGp" class="match-entry ng-scope">
-                                <a ng-href="live/174857" href="">
+                                <a ng-href="live/174857" (click)="onLiveClicked()">
                                   <!-- ngIf: isNotDefinedOrTrue(liveResume.isFirst) --><div ng-if="isNotDefinedOrTrue(liveResume.isFirst)" class="event-detail ng-scope">
                                     <span class="match-time ng-binding">17:05</span>
                                     <span class="sport-icon-bg sport-icon-bg-4"></span>
@@ -301,7 +301,7 @@
                           <div class="eventLive">
                             <div>
                               <!-- ngRepeat: liveResume in liveResumeGp --><div data-ng-repeat="liveResume in liveResumeGp" class="match-entry ng-scope">
-                                <a ng-href="live/176485" href="">
+                                <a ng-href="live/176485" (click)="onLiveClicked()">
                                   <!-- ngIf: isNotDefinedOrTrue(liveResume.isFirst) --><div ng-if="isNotDefinedOrTrue(liveResume.isFirst)" class="event-detail ng-scope">
                                     <span class="match-time ng-binding">11:50</span>
                                     <span class="sport-icon-bg sport-icon-bg-20"></span>
@@ -370,7 +370,7 @@
                           <div class="eventLive">
                             <div>
                               <!-- ngRepeat: liveResume in liveResumeGp --><div data-ng-repeat="liveResume in liveResumeGp" class="match-entry ng-scope">
-                                <a ng-href="live/175025" href="">
+                                <a ng-href="live/175025" (click)="onLiveClicked()">
                                   <!-- ngIf: isNotDefinedOrTrue(liveResume.isFirst) --><div ng-if="isNotDefinedOrTrue(liveResume.isFirst)" class="event-detail ng-scope">
                                     <span class="match-time ng-binding">16:45</span>
                                     <span class="sport-icon-bg sport-icon-bg-1"></span>
@@ -413,7 +413,7 @@
                           <div class="eventLive">
                             <div>
                               <!-- ngRepeat: liveResume in liveResumeGp --><div data-ng-repeat="liveResume in liveResumeGp" class="match-entry ng-scope">
-                                <a ng-href="live/175026" href="">
+                                <a ng-href="live/175026" (click)="onLiveClicked()">
                                   <!-- ngIf: isNotDefinedOrTrue(liveResume.isFirst) --><div ng-if="isNotDefinedOrTrue(liveResume.isFirst)" class="event-detail ng-scope">
                                     <span class="match-time ng-binding">19:00</span>
                                     <span class="sport-icon-bg sport-icon-bg-1"></span>
