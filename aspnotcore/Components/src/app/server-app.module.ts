@@ -22,7 +22,10 @@ import { ServerPrebootModule } from 'preboot/server';
 
         // Our Common AppModule
         AppModule,
-        ServerPrebootModule.recordEvents({ appRoot: 'app' })
+        ServerPrebootModule.recordEvents({
+            appRoot: 'app',
+            eventSelectors: [{selector: '.prebootButton', events: ['click'], preventDefault: true, freeze: true }]
+        })
     ]
 })
 export class ServerAppModule {

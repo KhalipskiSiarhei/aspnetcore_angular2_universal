@@ -1,0 +1,570 @@
+﻿<div>
+
+  <!--LivePerson: code should be somewhere before chat button-->
+  <a class="lebtn">
+    <div id="LP_DIV_1435761484656" style="display:none;"></div>
+  </a>
+
+  <ng-toast></ng-toast>
+
+  <div id="page-wrapper">
+
+    <div id="side-menu" class="sidemenu--left" ng-class="{active  :leftMenuService.isDisplayed }">
+      <div id="close-sidemenu" class="close-panel-bt">
+        <button class="button close">
+          <img src="https://betclick.hs.llnwd.net/e1/page/images/montecarlo/mobile/icons/close-btn.png" alt="Button close">
+        </button>
+      </div>
+
+      <!-- ngInclude: 'template/UI/sideMenus/logos/logo.html' --><h1 class="logo ng-scope" ng-include="'template/UI/sideMenus/logos/logo.html'"><a ui-sref="home" class="ng-scope" href=""><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/base/mobile/content/betclic_logo.png" alt="Betclic"></a></h1>
+      <ul id="sidemenu__wrapper">
+        <!-- ngIf: adminDisplayed -->
+        <li ng-if="adminDisplayed" gtm-mapping="" gtm-map-id="A4:g:l1" gtm-map-params="'Admin'" class="ng-scope">
+          <a ui-sref="admin" class="item-icon-left" gb-menu-close="" nav-clear="" href="">Admin</a>
+        </li><!-- end ngIf: adminDisplayed -->
+        <li class="submenu">
+          <ul ng-transclude="">
+            <div>
+              <ul class="main-links">
+                <li class="cashout" gb-menu-close="" ng-show="!isAuthenticated &amp;&amp; leftMenu.isCashoutEnabled">
+                  <a data-ui-sref="sport.cashout" href="">
+                    <span data-translate="sport.cashoutLabel" class="ng-scope">Cash Out</span>
+                  </a>
+                </li>
+                <li gb-menu-close="" ng-show="isAuthenticated" class="link-pending ng-hide">
+                  <span class="left-menu-icon"></span>
+                  <a data-ui-sref="sport.myBets({status:'ongoing'})" href="">
+                    <span data-translate="sport.pendingBets" class="ng-scope">Pending bet</span>
+                    <span ng-show="leftMenu.ongoingBets > 0" class="badge badge-assertive ng-binding ng-hide">0</span>
+                  </a>
+                </li>
+                <li gb-menu-close="" ng-show="isAuthenticated" class="link-ended ng-hide">
+                  <span class="left-menu-icon"></span>
+                  <a data-ui-sref="sport.myBets({status:'ended'})" href="">
+                    <span data-translate="sport.menuEndedBets" class="ng-scope">Ended Bets</span>
+                    <span ng-show="leftMenu.endedBetsSinceLastVisitCount > 0" class="badge badge-assertive ng-binding ng-hide">0</span>
+                  </a>
+                </li>
+                <li class="cashout ng-hide" gb-menu-close="" ng-show="isAuthenticated &amp;&amp; leftMenu.isCashoutEnabled">
+                  <a data-ui-sref="sport.cashout" href="">
+                    <span data-translate="sport.cashoutLabel" class="ng-scope">Cash Out</span>
+                    <span ng-show="leftMenu.numberOfBetsEligibleForCashout > 0" class="badge badge-assertive ng-binding ng-hide">0</span>
+                  </a>
+                </li>
+              </ul>
+              <div ng-show="isAuthenticated" class="menu-category ng-hide" menu-close="" nav-clear="">
+                <p class="title-category favorite-cat ng-scope" data-translate="sport.menuFavorites">Favourites</p>
+                <!-- ngRepeat: favorite in leftMenu.favorites -->
+              </div>
+              <div class="menu-category ng-hide" menu-close="" nav-clear="" ng-show="leftMenu.topCompetitions.length > 0">
+                <p class="title-category top-competition ng-scope" data-translate="sport.menuTopCompetitions">Top Competitions</p>
+                <!-- ngRepeat: competitionMenu in leftMenu.topCompetitions -->
+              </div>
+            </div>
+          </ul>
+        </li>
+        <li class="settings" gtm-mapping="" gtm-map-id="A4:g:l1" gtm-map-params="'Languages'" ng-hide="context.isAuthenticated">
+          <a ui-sref="settings" class="item-icon-left ng-scope" gb-menu-close="" nav-clear="" translate="" href="">Languages</a>
+        </li>
+        <li ng-show="context.isAuthenticated" gtm-mapping="" gtm-map-id="A4:g:l1" gtm-map-params="'Mailbox'" class="message ng-hide">
+          <a ui-sref="messages" class="item-icon-left" gb-menu-close="" nav-clear="" href="">
+            <span translate="" class="ng-scope">Messages</span>
+            <span class="badge badge-assertive new-messages ng-binding ng-hide" ng-show="messagesService.newMessagesCount != null &amp;&amp; messagesService.newMessagesCount > 0">
+              0
+            </span>
+          </a>
+        </li>
+
+        <li class="promos" gtm-mapping="" gtm-map-id="A4:g:l1" gtm-map-params="'Promotions'">
+          <a id="promotions" ui-sref="promotionsList" class="item-icon-left ng-scope" gb-menu-close="" nav-clear="" translate="" href="">Promotions</a>
+        </li>
+
+
+
+        <li id="othersItem" class="other" gtm-mapping="" gtm-map-id="A4:g:l1" gtm-map-params="'Others'">
+          <a ui-sref="others" class="item-icon-left ng-scope" gb-menu-close="" nav-clear="" translate="" href="">Other</a>
+        </li>
+        <!-- ngIf: availablesUniverses && availablesUniverses.length > 0 -->
+        <li class="univers ng-scope" ng-if="availablesUniverses &amp;&amp; availablesUniverses.length > 0 ">
+          <p translate="" class="ng-scope">More products</p>
+        </li><!-- end ngIf: availablesUniverses && availablesUniverses.length > 0 -->
+        <!-- ngRepeat: universe in availablesUniverses -->
+        <li ng-repeat="universe in availablesUniverses" class="univers ng-scope sport" ng-class="universe.UniversCode">
+          <gb-universe-link id="universe.UniversCode" device="universe.Device" webapp="universe.WebAppUrl" downloadapp="universe.StoreDownloadUrl" linkapp="universe.AppUrl" texte="universe.UniversCode" class="ng-isolate-scope">
+            <a ng-click="openAppOrDefault()" class="button button-positive"><span id="device" translate="global.device_0" class="ng-scope">iPhone</span> <span id="universCode" translate="global.sportTitle" class="ng-scope">Sports</span></a>
+          </gb-universe-link>
+        </li><!-- end ngRepeat: universe in availablesUniverses -->
+        <li ng-repeat="universe in availablesUniverses" class="univers ng-scope turf" ng-class="universe.UniversCode">
+          <gb-universe-link id="universe.UniversCode" device="universe.Device" webapp="universe.WebAppUrl" downloadapp="universe.StoreDownloadUrl" linkapp="universe.AppUrl" texte="universe.UniversCode" class="ng-isolate-scope">
+            <a ng-click="openAppOrDefault()" class="button button-positive"><span id="device" translate="global.device_0" class="ng-scope">iPhone</span> <span id="universCode" translate="global.turfTitle" class="ng-scope">Turf</span></a>
+          </gb-universe-link>
+        </li><!-- end ngRepeat: universe in availablesUniverses -->
+        <li ng-repeat="universe in availablesUniverses" class="univers ng-scope casino" ng-class="universe.UniversCode">
+          <gb-universe-link id="universe.UniversCode" device="universe.Device" webapp="universe.WebAppUrl" downloadapp="universe.StoreDownloadUrl" linkapp="universe.AppUrl" texte="universe.UniversCode" class="ng-isolate-scope">
+            <a ng-click="openAppOrDefault()" class="button button-positive"><span id="device" translate="global.device_0" class="ng-scope">iPhone</span> <span id="universCode" translate="global.casinoTitle" class="ng-scope">Casino</span></a>
+          </gb-universe-link>
+        </li><!-- end ngRepeat: universe in availablesUniverses -->
+      </ul>
+    </div>
+
+    <!-- ngIf: buttons.showHeader --><header ng-if="buttons.showHeader" class="bar top ng-scope" ng-class="{sub:displayTimer}" style="height: 44px;">
+      <!-- ngIf: isDownloadBannerActive -->
+      <!-- ngInclude: 'template/UI/header/bar.html' --><div ng-include="'template/UI/header/bar.html'" class="ng-scope">
+        <div class="actions-bar ng-scope">
+          <!-- ngIf: buttons.enableBack && !isBetclicPokerFr --><!-- ngInclude: 'template/UI/header/buttons/back.html' --><div ng-if="buttons.enableBack &amp;&amp; !isBetclicPokerFr" class="icons-left ng-scope" ng-include="'template/UI/header/buttons/back.html'">
+            <!-- ngIf: stateName() === 'account' -->
+            <!-- ngIf: stateName() === 'contractTerms' -->
+            <!-- ngIf: stateName() !== 'account' && stateName() !== 'contractTerms' --><button ng-if="stateName() !== 'account' &amp;&amp; stateName() !== 'contractTerms'" class="icon back ng-scope" ng-show="stateHistory.length > 1" ng-click="back()"></button><!-- end ngIf: stateName() !== 'account' && stateName() !== 'contractTerms' -->
+          </div><!-- end ngIf: buttons.enableBack && !isBetclicPokerFr -->
+          <!-- ngIf: buttons.enableMenu && !isBetclicPokerFr -->
+          <!-- ngIf: buttons.enableSearch -->
+          <!-- ngInclude: 'template/UI/header/logos/logo.html' --><div class="gb-logo ng-scope" ng-include="'template/UI/header/logos/logo.html'">
+            <a ui-sref="home" ng-hide="isBetclicPokerFr" class="ng-scope" href="">
+              <img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/base/mobile/content/betclic_logo.png" alt="Betclic">
+            </a>
+
+            <img ng-show="isBetclicPokerFr" src="https://betclick.hs.llnwd.net/e1/page/c16/betclic/mobile/logo_box.png" alt="Betclic" class="ng-scope ng-hide">
+          </div>
+          <!-- ngIf: buttons.enableAccount && !context.isAuthenticated && localStorage.lastLogin == undefined && !isBetclicPokerFr && isWebAppBannerHeaderFeatureAvailable === true -->
+          <!-- ngIf: buttons.enableAccount && !isBetclicPokerFr --><!-- ngInclude: 'template/UI/header/buttons/account.html' --><div ng-if="buttons.enableAccount &amp;&amp; !isBetclicPokerFr" id="accountBtn" ng-include="'template/UI/header/buttons/account.html'" class="ng-scope">
+            <!-- ngIf: context.isAuthenticated -->
+            <!-- ngIf: !context.isAuthenticated --><span ng-click="account()" ng-if="!context.isAuthenticated" gtm-mapping="" gtm-map-id="A2" gtm-map-params="'Login'" class="ng-scope">
+              <img class="avatar-account" src="https://betclick.hs.llnwd.net/e1/page/images/global/mobile/icons/avatar-account.png">
+            </span><!-- end ngIf: !context.isAuthenticated -->
+          </div><!-- end ngIf: buttons.enableAccount && !isBetclicPokerFr -->
+          <!-- ngIf: buttons.enableBackToRegister && !isBetclicPokerFr -->
+          <!-- ngIf: buttons.enableClose && !isBetclicPokerFr -->
+          <!-- ngIf: buttons.isBetclicPokerFrAndShowCloseBtn -->
+          <!-- ngIf: buttons.enableContactUs -->
+        </div>
+      </div>
+      <!-- ngIf: displaySubHeader --><div ng-if="displaySubHeader" class="ng-scope">
+        <!-- ngIf: displayTimer -->
+        <!-- ngIf: shouldDiplayAgeBanner -->
+      </div><!-- end ngIf: displaySubHeader -->
+    </header><!-- end ngIf: buttons.showHeader -->
+
+    <div class="page-nav swiper-nav swiper-free-mode headroom headroom--pinned headroom--top" data-ng-show="showNavBar" style="top: 44px;">
+      <div class="swiper-nav-wrapper">
+        <a class="nav-item swiper-slide swiper-slide-visible swiper-slide-active" ng-class="{'active': isHome}" ui-sref="sport.home" href="">
+          <span class="ng-binding">Home</span>
+        </a>
+        <!--<a class="nav-item" ng-class="{'active': isEventTemp}" ui-sref="sport.eventWithMatchName({matchName:'psg-om',id:9})">
+            <span>Event 5</span>
+        </a>-->
+
+        <a class="nav-item swiper-slide" ng-class="{'active': isSportList}" ui-sref="sport.sportList" href="">
+          <span class="ng-binding">Sports</span>
+        </a>
+        <!-- ngIf: isAllOfferEnabled --><a class="nav-item swiper-slide ng-scope" ng-if="isAllOfferEnabled" ng-class="{'active': isAllOffer}" ui-sref="sport.allOffer" href="">
+          <span class="live-label">All offer<span ng-show="livesCount &amp;&amp; livesCount > 0" class="live-count ng-binding">396</span></span>
+        </a><!-- end ngIf: isAllOfferEnabled -->
+        <!-- ngIf: !isAllOfferEnabled -->
+        <!-- ngIf: isCashoutEnabled --><a data-ng-if="isCashoutEnabled" class="nav-item swiper-slide ng-scope" ng-class="{'active': isCashout}" ui-sref="sport.cashout" href="">
+          <span class="live-label ng-binding">
+            Cash Out
+            <span ng-show="isAuthenticated &amp;&amp; numberOfBetsEligibleForCashout &amp;&amp; numberOfBetsEligibleForCashout > 0" class="live-count ng-binding ng-hide">0</span>
+          </span>
+        </a><!-- end ngIf: isCashoutEnabled -->
+        <!-- ngIf: !isAllOfferEnabled -->
+        <!-- ngIf: isColossusAvailable --><a data-ng-if="isColossusAvailable" class="nav-item swiper-slide nav-grids ng-scope" ng-class="{'active': isGrids}" ui-sref="sport.grids" href="">
+          <span class="ng-binding">Grid</span>
+        </a><!-- end ngIf: isColossusAvailable -->
+      </div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next" style="visibility: hidden;"></div>
+    </div>
+
+    <!-- uiView:  --><div id="wrapper" class="slide ng-scope" ui-view="" style="padding-top: 88px !important;">
+      <!-- uiView: undefined --><ui-view class="ng-scope">
+        <bcsp-page class="ng-scope ng-isolate-scope">
+          <div hide-back-button="hideBackButton" class="inner-content-wrapper ng-isolate-scope" buttons="buttons" enable-back-button="enableBackButton" enable-menu-button="enableMenuButton" enable-account-button="enableAccountButton" enable-close-button="enableCloseButton" enable-search-button="enableSearchButton">
+            <div class="inner-inner-content-wrapper" ng-class="{'has-header':showHeader}" ng-transclude="">
+
+              <div ng-transclude="" class="ng-scope">
+
+                <scroll-pull-to-refresh load-on-scroll="loadPullEvent()" class="ng-scope ng-isolate-scope">
+                  <div class="pull-refresh">
+                    <div ng-show="showPull" class="pull-img ng-hide"><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/pull-to-refresh.gif"></div>
+                    <div ng-show="showLoading" class="load-img ng-hide"><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/small-loader.gif"></div>
+                    <div ng-transclude="">
+                      <div class="scoreboard ng-isolate-scope" data-event="event">
+                        <div class="top-sb">
+                          <span class="datetime ng-binding">26/07/2017 - 05:30</span>
+                          <div class="competition ng-isolate-scope" data-competition="event.competition">
+                            <div ng-show="isAuthenticated" class="wrap-favorite ng-isolate-scope ng-hide" data-competition="competition">
+                              <a ng-click="toggleFavorite()" class="add-favorite" ng-class="{'is-favorite': competition.selected}"></a>
+                            </div>
+                            <h1 class="ng-binding">Basketball - WNBA</h1>
+                          </div>
+                        </div>
+                        <div class="match-info">
+                          <h2 style="display: inline-block;" class="event-name ng-binding">Los Angeles Sparks - Seattle Storm</h2>
+                          <!-- ngIf: event.competition.isEligibleForMbb -->
+                        </div>
+                      </div>
+
+                      <div load-if-display-in-browser="" load-that="loadPullEvent()" load-done="evtVmLoaded" class="ng-scope ng-isolate-scope">
+
+                        <div class="bet-categories swiper-container ng-isolate-scope swiper-free-mode ng-hide swiper-free-mode" ng-show="event.marketTypeCategories.length > 2" data-event="event">
+                          <div class="swiper-wrapper" style="padding-left: 0px; padding-right: 0px; width: 0px; height: 37px;">
+                            <!-- ngRepeat: marketTypeCategory in event.marketTypeCategories | orderBy:'position' --><div data-ng-repeat="marketTypeCategory in event.marketTypeCategories | orderBy:'position'" end-repeat="" class="swiper-slide market-type ng-scope swiper-slide-visible swiper-slide-active">
+
+                              <button class="button button-block ng-binding ng-hide button-assertive" data-ng-class="{'button-assertive': marketTypeCategory.selected }" data-ng-click="event.setSelectedMarketTypeCategory(marketTypeCategory)" ng-show="marketTypeCategory.isVisible">
+                                <span ng-switch="marketTypeCategory.code">
+                                  <!-- ngSwitchWhen: All --><span ng-switch-when="All" class="ng-scope"> <span data-translate="sport.allMarkets" class="ng-scope">All markets</span> </span><!-- end ngSwitchWhen: -->
+                                  <!-- ngSwitchWhen: MultipleBoost -->
+                                  <!-- ngSwitchDefault:  -->
+                                </span>
+                                (1)
+                              </button>
+                            </div><!-- end ngRepeat: marketTypeCategory in event.marketTypeCategories | orderBy:'position' --><div data-ng-repeat="marketTypeCategory in event.marketTypeCategories | orderBy:'position'" end-repeat="" class="swiper-slide market-type ng-scope">
+
+                              <button class="button button-block ng-binding" data-ng-class="{'button-assertive': marketTypeCategory.selected }" data-ng-click="event.setSelectedMarketTypeCategory(marketTypeCategory)" ng-show="marketTypeCategory.isVisible">
+                                <span ng-switch="marketTypeCategory.code">
+                                  <!-- ngSwitchWhen: All -->
+                                  <!-- ngSwitchWhen: MultipleBoost -->
+                                  <!-- ngSwitchDefault:  --><span ng-switch-default="" class="ng-scope"> <span class="ng-binding"> Popular markets </span> </span><!-- end ngSwitchWhen: -->
+                                </span>
+                                (1)
+                              </button>
+                            </div><!-- end ngRepeat: marketTypeCategory in event.marketTypeCategories | orderBy:'position' -->
+                          </div>
+                        </div>
+
+                        <!-- ngRepeat: market in sortedEventMarkets | marketTypeSelected: event.getMarketTypeCategorySelected() track by market.id --><div class="list sport ng-scope" data-ng-repeat="market in sortedEventMarkets | marketTypeSelected: event.getMarketTypeCategorySelected() track by market.id">
+                          <div class="bet-type-entry ng-isolate-scope" data-market="market" data-event-has-not-eligible-markets="event.hasNonEligibleMarkets">
+                            <h2 class="section-title">
+                              <span ng-bind-html="market.name" class="ng-binding"></span>
+                              <a data-ng-show="market.reasonsToBet" data-ng-click="market.reasonsToBet.toggleVisibility()" class="rtb-button sprite-icon ng-hide" data-ng-class="{'active' : market.reasonsToBet.isVisible}"></a>
+                              <!-- ngIf: market.isAvailableForCashOut --><span ng-if="market.isAvailableForCashOut" class="market-availible-for-cashout ng-scope"></span><!-- end ngIf: market.isAvailableForCashOut -->
+                              <!-- ngIf: eventHasNotEligibleMarkets && market.isEligibleForMbb -->
+                            </h2>
+                            <div class="reason-to-bet ng-hide" data-ng-show="market.reasonsToBet.isVisible">
+                              <div class="wrap-txt">
+                                <!-- ngRepeat: rtb in market.reasonsToBet.reasons -->
+                              </div>
+                              <div class="source"><span data-translate="sport.betRadarSource" class="ng-scope">Source :</span></div>
+                            </div>
+                            <div data-ng-show="market.isSuspended" class="ng-hide">
+                              <div class="bet-suspended ng-scope" data-translate="sport.betSuspended">Suspended</div>
+                            </div>
+                            <div id="container">
+                              <!-- ngIf: !market.isSuspended --><div data-ng-if="!market.isSuspended" class="odds-default ng-scope">
+                                <!-- "Slider" layout -->
+                                <!-- ngIf: isSlider(market.marketTypeLayout) -->
+                                <!-- "Columns" layout -->
+                                <!-- ngIf: isColumns(market.marketTypeLayout) -->
+                                <!-- ngIf: isCast(market.marketTypeLayout) -->
+                                <!-- "Default" layout (1 column) -->
+                                <!-- ngIf: isNormal(market.marketTypeLayout) --><div data-ng-if="isNormal(market.marketTypeLayout)" class="market ng-scope">
+                                  <!-- ngRepeat: selection in take(orderBy(market.selections, 'line'), getShowedSelectionLimit()) --><div class="line ng-scope" data-ng-repeat="selection in take(orderBy(market.selections, 'line'), getShowedSelectionLimit())">
+                                    <div class="match-odd ng-isolate-scope" id="166629680" selection="selection">
+                                      <span class="odd-label ng-binding">
+                                        Los Angeles Sparks
+                                        <span ng-show="selection.handicapDecrease" class="update-odd decrease label-evolution sprite-icon ng-hide"></span>
+                                        <span ng-show="selection.handicapIncrease" class="update-odd increase label-evolution sprite-icon ng-hide"></span>
+                                      </span>
+                                      <div class="odd-button ng-binding ng-isolate-scope" data-ng-click="addSelectionToBettingSlip();$event.stopPropagation();$event.preventDefault();" ng-class="{'selected': isSelectionInBettingSlip() }" ng-mousedown="selectionMouseDown();" ng-mouseup="selectionMouseUp();" selection="selection">
+                                        2.50
+                                        <!-- ngIf: selection.decrease -->
+                                        <!-- ngIf: selection.increase -->
+                                      </div>
+                                    </div>
+                                  </div><!-- end ngRepeat: selection in take(orderBy(market.selections, 'line'), getShowedSelectionLimit()) --><div class="line ng-scope" data-ng-repeat="selection in take(orderBy(market.selections, 'line'), getShowedSelectionLimit())">
+                                    <div class="match-odd ng-isolate-scope" id="166629681" selection="selection">
+                                      <span class="odd-label ng-binding">
+                                        Draw
+                                        <span ng-show="selection.handicapDecrease" class="update-odd decrease label-evolution sprite-icon ng-hide"></span>
+                                        <span ng-show="selection.handicapIncrease" class="update-odd increase label-evolution sprite-icon ng-hide"></span>
+                                      </span>
+                                      <div class="odd-button ng-binding ng-isolate-scope" data-ng-click="addSelectionToBettingSlip();$event.stopPropagation();$event.preventDefault();" ng-class="{'selected': isSelectionInBettingSlip() }" ng-mousedown="selectionMouseDown();" ng-mouseup="selectionMouseUp();" selection="selection">
+                                        5.50
+                                        <!-- ngIf: selection.decrease -->
+                                        <!-- ngIf: selection.increase -->
+                                      </div>
+                                    </div>
+                                  </div><!-- end ngRepeat: selection in take(orderBy(market.selections, 'line'), getShowedSelectionLimit()) --><div class="line ng-scope" data-ng-repeat="selection in take(orderBy(market.selections, 'line'), getShowedSelectionLimit())">
+                                    <div class="match-odd ng-isolate-scope" id="166629682" selection="selection">
+                                      <span class="odd-label ng-binding">
+                                        Seattle Storm
+                                        <span ng-show="selection.handicapDecrease" class="update-odd decrease label-evolution sprite-icon ng-hide"></span>
+                                        <span ng-show="selection.handicapIncrease" class="update-odd increase label-evolution sprite-icon ng-hide"></span>
+                                      </span>
+                                      <div class="odd-button ng-binding ng-isolate-scope" data-ng-click="addSelectionToBettingSlip();$event.stopPropagation();$event.preventDefault();" ng-class="{'selected': isSelectionInBettingSlip() }" ng-mousedown="selectionMouseDown();" ng-mouseup="selectionMouseUp();" selection="selection">
+                                        3.50
+                                        <!-- ngIf: selection.decrease -->
+                                        <!-- ngIf: selection.increase -->
+                                      </div>
+                                    </div>
+                                  </div><!-- end ngRepeat: selection in take(orderBy(market.selections, 'line'), getShowedSelectionLimit()) -->
+                                  <a class="show-more-button ng-hide" data-ng-show="isShowMoreSelectionsButtonAvailable()" data-ng-click="setShowAllSelections(true)"><span data-translate="sport.seeMore" class="ng-scope">See more</span></a>
+                                  <a class="show-more-button ng-hide" data-ng-show="isShowLessSelectionsButtonAvailable()" data-ng-click="setShowAllSelections(false)"><span data-translate="sport.hiddBetList" class="ng-scope">Hide bets list</span></a>
+                                </div><!-- end ngIf: isNormal(market.marketTypeLayout) -->
+                              </div><!-- end ngIf: !market.isSuspended -->
+                            </div>
+
+                          </div>
+                        </div><!-- end ngRepeat: market in sortedEventMarkets | marketTypeSelected: event.getMarketTypeCategorySelected() track by market.id -->
+                      </div>
+
+                    </div>
+                  </div>
+                </scroll-pull-to-refresh>
+
+              </div>
+
+            </div>
+            <!-- ngIf: displayBanner -->
+            <!-- ngIf: hideFooter != true --><div class="gb-footer com ng-isolate-scope" ng-if="hideFooter != true" ng-show="isBetclicPokerFrAndShowFooter || isBetclicFrAndNotPoker || isNotBetclicFr">
+              <!-- ngInclude: 'template/UI/footer/common.footer.html' --><div ng-include="'template/UI/footer/common.footer.html'" class="ng-scope">
+                <footer class="ng-scope">
+                  <!-- ngIf: !showLinksWithoutRef --><ul ng-if="!showLinksWithoutRef" class="icons flex ng-scope">
+                    <!-- ngRepeat: icon in elements.icons -->
+                    <li ng-repeat="icon in elements.icons" class="ng-scope">
+                      <a ng-href="https://m.betclic.com/Sport/responsiblegaming" target="blank" ng-attr-id="{{icon.code}}" href="" id="18+ BC Webapp"> <img ng-src="https://betclick.hs.llnwd.net/r1/media/retention/eses/content/newimages/18.png" src="https://betclick.hs.llnwd.net/r1/media/retention/eses/content/newimages/18.png"></a>
+                    </li><!-- end ngRepeat: icon in elements.icons -->
+                    <li ng-repeat="icon in elements.icons" class="ng-scope">
+                      <a ng-href="http://goo.gl/NHvJkB" target="blank" ng-attr-id="{{icon.code}}" href="" id="Malta BC Webapp"> <img ng-src="https://betclick.hs.llnwd.net/r1/media/retention/eses/content/newimages/MGA logo.png" src="https://betclick.hs.llnwd.net/r1/media/retention/eses/content/newimages/MGA logo.png"></a>
+                    </li><!-- end ngRepeat: icon in elements.icons -->
+                    <li ng-repeat="icon in elements.icons" class="ng-scope">
+                      <a ng-href="http://www.gamcare.org.uk/" target="blank" ng-attr-id="{{icon.code}}" href="" id="Gamcare Webapp"> <img ng-src="https://betclick.hs.llnwd.net/r1/media/retention/eses/content/newimages/gamcare.png" src="https://betclick.hs.llnwd.net/r1/media/retention/eses/content/newimages/gamcare.png"></a>
+                    </li><!-- end ngRepeat: icon in elements.icons -->
+                  </ul><!-- end ngIf: !showLinksWithoutRef -->
+                  <!-- ngIf: !showLinksWithoutRef --><ul ng-if="!showLinksWithoutRef" class="links ng-scope">
+                    <!-- ngRepeat: link in elements.links -->
+                    <li ng-repeat="link in elements.links" class="ng-scope">
+                      <a ng-href="./termsAndConditions" target="blank" ng-attr-id="{{link.code}}" class="ng-binding" href="" id=" footer_tc">General Terms &amp; Conditions</a>
+                    </li><!-- end ngRepeat: link in elements.links -->
+                    <li ng-repeat="link in elements.links" class="ng-scope">
+                      <a ng-href="./responsiblegaming" target="blank" ng-attr-id="{{link.code}}" class="ng-binding" href="" id="footer_rg">Responsible Gaming</a>
+                    </li><!-- end ngRepeat: link in elements.links -->
+                    <li ng-repeat="link in elements.links" class="ng-scope">
+                      <a ng-href="./privacypolicy" target="blank" ng-attr-id="{{link.code}}" class="ng-binding" href="" id="footer_Privacy&amp;Cookies">Privacy &amp; Cookies Policy</a>
+                    </li><!-- end ngRepeat: link in elements.links -->
+                  </ul><!-- end ngIf: !showLinksWithoutRef -->
+                  <!-- ngIf: !showLinksWithoutRef --><ul ng-if="!showLinksWithoutRef" class="ng-scope">
+                    <!-- ngRepeat: disclaimer in elements.disclaimers track by $index -->
+                    <li ng-repeat="disclaimer in elements.disclaimers track by $index" ng-bind-html="disclaimer | unsafe" class="ng-binding ng-scope">You must be over 18 years old to bet on this Website</li><!-- end ngRepeat: disclaimer in elements.disclaimers track by $index -->
+                    <li ng-repeat="disclaimer in elements.disclaimers track by $index" ng-bind-html="disclaimer | unsafe" class="ng-binding ng-scope">This site is operated by Mangas Gaming Malta Limited, company registration number C 46185, with registered address at Level 3, Tagliaferro Business Centre, High Street c/w Gaiety Lane, Sliema, SLM 1551, Malta, which is regulated and licensed by the Malta Gaming Authority (MGA) under the following licenses: MGA/CL2/1009/2014; MGA/CL1/1010/2014; MGA/CL1/1011/2014; MGA/CL1/1012/2014; MGA/CL1/1013/2014; MGA/CL1/1014/2014; MGA/CL1/1015/2014; MGA/CL3/1017/2014 issued on the 25th July 2014 and MGA/CL1/1092/2015; MGA/CL1/1093/2015; MGA/CL1/1104/2015 issued on the 24th November 2015.</li><!-- end ngRepeat: disclaimer in elements.disclaimers track by $index -->
+                    <li ng-repeat="disclaimer in elements.disclaimers track by $index" ng-bind-html="disclaimer | unsafe" class="ng-binding ng-scope"><b>GAMBLING CAN BE ADDICTIVE. PLEASE PLAY RESPONSIBLY</b></li><!-- end ngRepeat: disclaimer in elements.disclaimers track by $index -->
+                  </ul><!-- end ngIf: !showLinksWithoutRef -->
+                  <!-- footer w/o href -->
+                  <!-- ngIf: showLinksWithoutRef -->
+                  <!-- ngIf: showLinksWithoutRef -->
+                  <!-- ngIf: showLinksWithoutRef -->
+                </footer>
+              </div>
+            </div><!-- end ngIf: hideFooter != true -->
+          </div>
+        </bcsp-page>
+      </ui-view>
+    </div>
+
+    <div bcsp-request-verification-token="U7HnSKkTcD-_DxuQwKo6IzRGUzbKi_EChd1Ekj-T5Z8uzN2YMma-_yz_trwt4YuRKbA_lgdbVfoDLwSPzCIEvkaBrL41:uVkZnedfbBQ6oLBJViIcZx4mQkhCI5yC7uLKeCAiz1yRgmbTuJeauMo0xNAtPDSDGVTpet6ZaXl-2xY3gITVJAZ53bA1">
+      <div data-ng-show="showBettingSlip">
+        <div class="betslip-tap modalDisplay" ng-click="toggleBetSlip();" ng-class="{open : displayBetSlip}">
+          <span class="sprite-icon"></span>
+          <!--ng-show="betsCount > 0"-->
+          <!-- ngIf: bettingSlip.getNumberOfAllSelections()>0 -->
+        </div>
+
+        <!-- ngIf: bettingSlip.isAllResolve() --><div class="betslip-container modalDisplay ng-scope" ng-class="{open : displayBetSlip}" ng-if="bettingSlip.isAllResolve()">
+
+
+          <div class="header-bs">
+            <div class="stakes-number sprite-icon">
+              <p class="ng-binding">0</p>
+            </div>
+          </div>
+
+
+          <div class="scroll-bs">
+
+            <div class="summary-box ng-isolate-scope ng-hide" betting-slip="bettingSlip" togglebs="toggleBetSlip()" is-live="isLive" ng-show="bettingSlip.thereIsARecap() || bettingSlip.thereIsSecondChance()">
+              <h2 class="section-title ng-scope ng-hide" ng-show="bettingSlip.recapStakes.summary.numberOfBets" data-translate="sport.confirmationTitle">Confirmation</h2>
+              <!-- ngRepeat: stake in bettingSlip.recapStakes.details -->
+              <!-- ngIf: bettingSlip.recapStakes.summary.numberOfBets -->
+              <!-- ngIf: bettingSlip.thereIsSecondChance() -->
+              <!-- ngIf: !bettingSlip.thereIsSecondChance() --><div ng-if="!bettingSlip.thereIsSecondChance()" class="ng-scope">
+                <a class="bt-action retain-button ng-scope" ng-click="betAgain()" ng-show="!isLive" data-translate="sport.btnBetAgain">Retain Selections</a>
+                <a class="bt-action ng-scope" ng-click="recapOkClick()" data-translate="sport.btnOk">OK</a>
+              </div><!-- end ngIf: !bettingSlip.thereIsSecondChance() -->
+              <!-- ngIf: bettingSlip.thereIsSecondChance() && !bettingSlip.bettingInProgress -->
+              <div class="betting-progress ng-hide" ng-show="bettingSlip.bettingInProgress"><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/small-loader.gif"><p></p></div>
+            </div>
+
+            <div ng-show="!bettingSlip.thereIsARecap() &amp;&amp; !bettingSlip.thereIsSecondChance()">
+              <div class="menu-bs clearfix ng-isolate-scope" betting-slip="bettingSlip" delete-mode="deleteMode" is-live="isLive" slider-selected="sliderSelected">
+                <div class="left-zone">
+                  <a ng-class="{selected : !isLive}" ng-click="showPrelive()" class="selected">
+                    <span class="label-bt ng-scope" data-translate="sport.bsUpcoming">Upcoming</span><!-- ngIf: isLive && bettingSlip.numberOfPreliveSelections() > 0 -->
+                  </a>
+                  <a class="live-bt" ng-class="{selected : isLive}" ng-click="showLive()">
+                    <span class="label-bt ng-scope" data-translate="sport.bsLive">Live</span><!-- ngIf: !isLive && bettingSlip.numberOfliveSelections() > 0 -->
+                  </a>
+                </div>
+                <div class="right-zone">
+                  <!-- ngIf: sliderIsAvailable() -->
+                  <!-- ngIf: deleteAllIsAvailable() --><a class="delete-bt ng-scope" ng-if="deleteAllIsAvailable()"><span class="sprite-icon" ng-click="deleteModeClick()"></span></a><!-- end ngIf: deleteAllIsAvailable() -->
+                </div>
+              </div>
+
+              <div ng-show="!bettingSlip.isEmpty(isLive)" class="ng-hide">
+
+                <!-- ngIf: bettingSlip.ThereIsAnError(isLive,sliderSelected) -->
+
+                <div class="bets-container ng-isolate-scope" betting-slip="bettingSlip" delete-mode="deleteMode" is-live="isLive" slider-selected="sliderSelected">
+
+                  <!-- ngIf: deleteMode -->
+                  <!-- ngRepeat: selection in bettingSlip.getSelections(isLive) -->
+
+                  <div class="delete-confirm ng-hide" ng-show="deleteMode">
+                    <a class="bt-action cancel ng-scope" ng-click="cancelDeleteSelections()" data-translate="sport.cancel">Cancel</a>
+                    <a class="bt-action ng-scope" ng-click="deleteSelections()" data-translate="sport.delete">delete</a>
+                  </div>
+
+                </div>
+
+
+                <div class="wrap-bottom-zone">
+
+                  <!-- ngInclude: 'bsInputs.html' --><div ng-include="'bsInputs.html'" class="ng-scope">
+                    <!-- ngInclude: 'bsMultipleSystemSlider.html' --><div ng-include="'bsMultipleSystemSlider.html'" class="ng-scope">
+                      <div ng-show="multipleIsAvailable() &amp;&amp; !sliderSelected" class="multiple stakes-fieldset ng-isolate-scope collapse ng-hide" ng-class="{collapse : !isMultiCollapsed(), 'overlayed': !bettingSlip.checkIfbettingAllowed()}" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" is-multi-collapsed="isMultiCollapsed()" set-multi-collapsed="setMultiCollapsed(isCollapse)" is-system-collapsed="isSystemCollapsed()" set-system-collapsed="setSystemCollapsed(isCollapse)">
+                        <p class="stakes-fieldset-title" ng-click="clickCollapse()"><span data-translate="sport.multiple" class="ng-scope">Multiple</span><span ng-show="bettingSlip.isCashOutApplicable(isLive)" class="bs-multiple-bet-availible-for-cashout"></span></p>
+                        <div ng-show="!isMultiCollapsed()">
+                          <!-- ngIf: bettingSlip.multipleStakeTooLow[isLive] -->
+                          <!-- ngIf: bettingSlip.multipleStakeTooHigh[isLive] -->
+
+                          <div class="bs-odd"> <span data-translate="sport.oddsWithSemicolon" class="ng-scope">Odds:</span> <strong class="ng-binding">---</strong></div>
+                          <div class="bet-control-fieldset">
+                            <span class="change-value disabled" ng-click="!bettingSlip.MultipleIsAllowed(isLive) || lessMultipleBetValue()" ng-class="{disabled : !bettingSlip.MultipleIsAllowed(isLive)}" ng-show="bettingSlip.checkIfbettingAllowed()">-</span>
+                            <input bcsp-input-stake="" type="number" class="betslip-betvalue ng-isolate-scope" amount="multipleStake" ng-disabled="!bettingSlip.MultipleIsAllowed(isLive) || !bettingSlip.checkIfbettingAllowed()" disabled="disabled">
+                            <span class="change-value disabled" ng-click="!bettingSlip.MultipleIsAllowed(isLive) || moreMultipleBetValue()" ng-class="{disabled : !bettingSlip.MultipleIsAllowed(isLive)}" ng-show="bettingSlip.checkIfbettingAllowed()">+</span>
+                          </div>
+                          <p class="potential-fieldset"><span data-translate="sport.potentialWinnings" class="ng-scope">Potential winnings</span> : <strong class="ng-binding">£0.00</strong></p>
+                        </div>
+                      </div>
+
+                      <div ng-show="systemIsAvailable() &amp;&amp; !sliderSelected &amp;&amp; systems.length > 0" class="multiple stakes-fieldset ng-isolate-scope ng-hide" ng-class="{collapse : !isSystemCollapsed()}" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" is-multi-collapsed="isMultiCollapsed()" set-multi-collapsed="setMultiCollapsed(isCollapse)" is-system-collapsed="isSystemCollapsed()" set-system-collapsed="setSystemCollapsed(isCollapse)">
+
+                        <p class="stakes-fieldset-title ng-scope" ng-click="clickCollapse()" data-translate="sport.systemStake">System</p>
+
+                        <div ng-show="!isSystemCollapsed()" class="ng-hide">
+                          <div ng-show="systemNotAvailableTooMuchSelection()" data-translate="sport.bettingSlipMaxSelection" class="ng-scope ng-hide">No system bet available for 9 or more selections.</div>
+                          <div ng-show="!systemNotAvailableTooMuchSelection()">
+                            <!-- ngIf: bettingSlip.systemStakeTooLow[isLive] -->
+                            <!-- ngIf: bettingSlip.systemStakeTooHigh[isLive] -->
+                            <div class="bet-control-fieldset">
+                              <span class="change-value disabled" ng-click="lessSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">-</span>
+                              <input bcsp-input-stake="" type="number" class="betslip-betvalue ng-isolate-scope" amount="systemStake" ng-disabled="bettingSlip.ThereIsAnMultipleError(isLive)" disabled="disabled">
+                              <span class="change-value disabled" ng-click="moreSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">+</span>
+                            </div>
+
+                            <select ng-model="currentSystem" ng-options="system.name for system in systems" class="ng-pristine ng-untouched ng-valid"><option value="?" selected="selected" label=""></option></select>
+                            <p class="potential-fieldset"><span data-translate="sport.potentialWinnings" class="ng-scope">Potential winnings</span> : <strong class="ng-binding">£0.00</strong></p>
+                          </div>
+                        </div>
+
+                      </div>
+
+
+                      <div ng-show="sliderIsAvailable() &amp;&amp; sliderSelected" class="slider-wrap stakes-fieldset ng-isolate-scope ng-hide" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected">
+
+                        <div class="stakes-fieldset-slider" ng-show="!systemNotAvailableTooMuchSelection()">
+                          <div class="input-wrap">
+                            <span class="change-value disabled" ng-click="lessSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">-</span>
+                            <input bcsp-input-stake="" type="number" class="betslip-betvalue ng-isolate-scope" amount="sliderStake" ng-disabled="bettingSlip.ThereIsAnMultipleError(isLive)" disabled="disabled">
+                            <span class="change-value disabled" ng-click="moreSystemBetValue()" ng-class="{disabled : bettingSlip.ThereIsAnMultipleError(isLive)}">+</span>
+                          </div>
+                          <span data-translate="sport.stakePerBet" class="ng-scope">Stake per bet:</span>
+                        </div>
+
+                        <div>
+                          <div ng-show="systemNotAvailableTooMuchSelection()" data-translate="sport.bettingSlipMaxSelection" class="ng-scope ng-hide">No system bet available for 9 or more selections.</div>
+                          <div ng-show="!systemNotAvailableTooMuchSelection()">
+                            <!-- ngIf: bettingSlip.sliderStakeTooLow[isLive] -->
+                            <!-- ngIf: bettingSlip.sliderStakeTooHigh[isLive] -->
+
+                            <div class="zone-slider nbCol-0" ng-class="'nbCol-'+sliderSystems.length">
+                              <div class="wrap-curve">
+                                <div class="curve-infos">
+                                  <!-- ngRepeat: system in sliderSystems -->
+                                </div>
+                                <img class="mask" src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/mask-system.png">
+                                <div class="curve-gain">
+                                  <!-- ngRepeat: system in sliderSystems -->
+                                </div>
+                              </div>
+                              <div id="wrap-range-slider">
+                                <div class="angular-custom-range-slider ng-isolate-scope" min="sliderMin" max="sliderMax" handle-values="sliderValue" value-update="sliderValue[0].value"><div class="angular-custom-range-slider-range"><span class="range-bar range-bar-0"></span><div class="angular-custom-range-slider-handle angular-custom-range-slider-handle-0"></div></div><div class="angular-custom-range-slider-values"><!-- ngRepeat: handleValue in handleValues --><!-- ngIf: showValues --><!-- end ngRepeat: handleValue in handleValues --></div></div>
+                              </div>
+                              <div class="recap-slider">
+                                <p class="system-name ng-binding ng-hide" ng-show="currentSiderSystem.namesToTranslate"></p>
+                                <p class="system-name ng-binding" ng-show="!currentSiderSystem.namesToTranslate"></p>
+                                <p class="system-description ng-binding"></p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="betslip-recap ng-isolate-scope" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected">
+
+                    <div class="betting-progress ng-hide" ng-show="bettingSlip.bettingInProgress"><img src="https://betclick.hs.llnwd.net/e1/page/images/betclic/sport/mobile/icons/small-loader.gif"><p></p></div>
+                    <div>
+                      <p class="stakes-total"><span data-translate="sport.numberBets" class="ng-scope">Number of bets</span> : <strong class="ng-binding">0</strong></p>
+                      <p class="stakes-recap"><span data-translate="sport.totalStake" class="ng-scope">Total stake</span> : <strong class="ng-binding">£0.00</strong></p>
+                      <p class="stakes-potential">
+                        <span data-translate="sport.potentialWinnings" class="ng-scope">Potential winnings</span> : <strong class="ng-binding">
+                          £0.00
+                          <!-- ngIf: bettingSlip.taxContext.isActive -->
+                        </strong>
+                      </p>
+                      <bcsp-multiple-boost-tooltip ng-show="bettingSlip.MultipleIsAllowed(isLive) || bettingSlip.numberOfSelections(isLive) === 1" betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" class="ng-isolate-scope ng-hide"><!-- ngIf: resultingBonus = getCurrentBonus(); resultingBonus.boostExists && bettingSlip.shouldShowBoostHint(isLive) --></bcsp-multiple-boost-tooltip>
+                      <bcsp-tax-free-note betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" class="ng-isolate-scope">
+                        <!-- ngIf: bettingSlip.taxContext.isActive -->
+
+                      </bcsp-tax-free-note>
+                    </div>
+                    <div class="bt-center">
+                      <button class="bt-action ng-scope" type="button" data-translate="sport.betNow" ng-click="bet()" ng-disabled="!bettingSlip.isOkToBet(isLive,sliderSelected)" ng-show="!bettingSlip.bettingInProgress" disabled="disabled">Bet now</button>
+                      <bcsp-tax-tooltip betting-slip="bettingSlip" is-live="isLive" slider-selected="sliderSelected" class="ng-isolate-scope">
+                        <!-- ngIf: bettingSlip.taxContext.isActive && bettingSlip.taxContext.displayTooltip -->
+
+                      </bcsp-tax-tooltip>
+                    </div>
+                    <!--<input type="button" value="FakeRecap" ng-click="fakeRecap()" ng-disabled="bettingSlip.bettingInProgress" />-->
+                  </div>
+
+
+                </div>
+              </div>
+              <div ng-show="bettingSlip.isEmpty(isLive)">
+                <div class="error-bs"><span data-translate="sport.emptyCart" class="ng-scope">There's no valid selection in your cart</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- end ngIf: bettingSlip.isAllResolve() -->
+
+        <div class="bs-overlay" ng-class="{active : displayBetSlip}" ng-click="toggleBetSlip();">
+          <div class="wrap-close">
+            <div class="close-bs sprite-icon"></div>
+          </div>
+        </div>
+      </div>
+      <div class="forbidden-sticker ng-hide" data-ng-show="!displayBetSlip &amp;&amp; bettingSlip.shouldForbiddanceStickedMessageBeShown()">
+        <a class="close-btn" ng-click="closeSticker()">
+          <span class="close-icon"></span>
+        </a>
+        <p class="ng-binding"></p>
+      </div>
+    </div>
+  </div>
+
+  <gb-google-tag-manager class="ng-scope"></gb-google-tag-manager>
+</div>
